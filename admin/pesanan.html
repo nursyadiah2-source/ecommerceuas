@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pesanan Admin — Nura Baby Care</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style_admin.css" />
+</head>
+<body>
+  <input type="checkbox" id="adminSidebarToggle" class="admin-sidebar-toggle" hidden />
+
+  <header class="site-header">
+    <div class="container navbar-admin">
+      <div class="brand" aria-label="Nura Baby Care">
+        <img class="brand-logo" src="../images/logo/baby-logo.png" alt="Nura Baby Care" onerror="this.style.display='none'" />
+        <div>
+          <div class="brand-title">Nura Baby Care</div>
+          <div class="brand-subtitle">Backoffice Admin</div>
+        </div>
+      </div>
+
+      <div class="admin-actions">
+        <button class="icon-btn btn-hamburger" type="button" aria-label="Buka menu" for="adminSidebarToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="hide-sm admin-greeting">Halo, <span id="adminName">-</span></span>
+        <button id="btnLogoutAdmin" class="btn btn-ghost" type="button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="admin-sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-brand">
+        <div class="sidebar-badge"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <div class="sidebar-brand-name">Nura Baby Care</div>
+          <div class="sidebar-brand-role">Admin</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Menu Admin">
+      <a class="sidebar-item" href="dashboard.html"><span class="sidebar-icon">📊</span><span class="sidebar-label">Dashboard</span></a>
+      <a class="sidebar-item" href="produk.html"><span class="sidebar-icon">📦</span><span class="sidebar-label">Produk</span></a>
+      <a class="sidebar-item" href="stok.html"><span class="sidebar-icon">📥</span><span class="sidebar-label">Stok</span></a>
+      <a class="sidebar-item active" href="pesanan.html"><span class="sidebar-icon">📋</span><span class="sidebar-label">Pesanan</span></a>
+    </nav>
+  </aside>
+
+  <label class="admin-sidebar-backdrop" for="adminSidebarToggle" aria-hidden="true"></label>
+  <div class="mobile-overlay" aria-hidden="true"></div>
+
+  <main class="admin-main" id="main">
+    <div class="container admin-container">
+      <section class="admin-hero">
+        <div class="section-head" style="margin-bottom:10px;">
+          <h2><i class="fa-solid fa-receipt"></i> Kelola Pesanan</h2>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="orders-card">
+          <div class="orders-head orders-head--cards">
+            <div>Pesanan</div>
+            <div>Status & Aksi</div>
+          </div>
+          <div class="orders-list" id="pesananList">
+            <div class="muted" style="padding:16px 8px; font-weight:900">Memuat pesanan...</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer style="padding:18px 0; text-align:center; color:rgba(43,27,34,.65); font-weight:900;">
+      © <span id="year"></span>
+      <a href="https://www.instagram.com/nrrrsydhh/" 
+        target="_blank"
+        style="color:inherit; text-decoration:none;">
+        Develop by Nurr
+      </a>
+    </footer>
+
+
+
+  <script src="script_admin.js"></script>
+  <script src="sidebar_mobile_fix.js"></script>
+
+
+  <script>
+    (function(){
+      const LS = {
+        ORDERS: 'ecosmet_orders',
+        CUSTOMERS: 'ecosmet_customers'
+      };
+
+      const safeParse = (raw, fallback) => { try { return JSON.parse(raw); } catch { return fallback; } };
+      const getOrders = () => safeParse(localStorage.getItem(LS.ORDERS), []);
+      const setOrders = (o) => localStorage.setItem(LS.ORDERS, JSON.stringify(o));
+      const getCustomers = () => safeParse(localStorage.getItem(LS.CUSTOMERS), []);
+
+      const STATUS_OPTIONS = [
+        'Diproses',
+        'Dikirim',
+        'Selesai',
+        'Dibatalkan',
+      ];
+
+      function formatRupiah(n){
+        const num = Number(n||0);
+        return 'Rp ' + num.toLocaleString('id-ID');
+      }
+
+      function statusBadge(status){
+        const s = String(status||'').trim();
+        let cls = 'rgba(96,165,250,.12)';
+        let color = '#1E40AF';
+        if(s.includes('Dibatalkan')){ cls='rgba(190,25,60,.12)'; color='#7F1D1D'; }
+        if(s.includes('Selesai')){ cls='rgba(15,118,110,.12)'; color='#0F766E'; }
+        if(s.includes('Dikirim')){ cls='rgba(59,130,246,.12)'; color='#1D4ED8'; }
+        return `<span class="chip" style="background:${cls}; border:1px solid rgba(96,165,250,.22); color:${color}; font-weight:1000; padding:8px 12px; border-radius:999px; display:inline-flex; align-items:center; gap:8px"><i class="fa-solid fa-circle-info"></i>${s || '-'} </span>`;
+      }
+
+      
+
+      function render(){
+        if(!window.requireAdmin || !window.requireAdmin()) return;
+        if(window.initAdminMenu) window.initAdminMenu();
+        if(document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
+
+        const wrap = document.getElementById('pesananList');
+        if(!wrap) return;
+
+        const orders = getOrders();
+        const customers = getCustomers();
+
+        if(!orders.length){
+          wrap.innerHTML = '<div class="muted" style="padding:16px 8px; font-weight:900">Belum ada pesanan.</div>';
+          return;
+        }
+
+        const sorted = orders.slice().sort((a,b)=> new Date(b.createdAt)-new Date(a.createdAt));
+
+        wrap.innerHTML = sorted.map((o, idx) => {
+          const cust = customers.find(c => c.id === o.userId) || null;
+          const name = cust?.name || o.userEmail || 'Customer';
+          const st = o.status || 'Diproses';
+          const dateText = o.createdAt ? new Date(o.createdAt).toLocaleString('id-ID') : '-';
+
+          const selectId = `statusSel_${o.id}`;
+
+          const items = Array.isArray(o.items) ? o.items : [];
+          const grouped = items.reduce((acc, it) => {
+            const key = String(it.name || it.productId || '').trim();
+            const qty = Number(it.qty || 0);
+            if(!key) return acc;
+            acc[key] = (acc[key] || 0) + qty;
+            return acc;
+          }, {});
+          const productLines = Object.keys(grouped).length
+            ? Object.keys(grouped).map(n => `${n} ×${grouped[n]}`).join('<br/>')
+            : '-';
+
+          return `
+            <div class="order-card-admin" data-order-id="${o.id}">
+              <div class="order-card-admin__left">
+                <div class="order-card-admin__row">
+                  <div class="order-card-admin__label">Nomor Invoice</div>
+                  <div class="order-card-admin__value order-card-admin__invoice">${o.id || '-'}</div>
+                </div>
+
+                <div class="order-card-admin__row">
+                  <div class="order-card-admin__label">Nama Customer</div>
+                  <div class="order-card-admin__value">${name}</div>
+                </div>
+
+                <div class="order-card-admin__row">
+                  <div class="order-card-admin__label">Daftar Produk</div>
+                  <div class="order-card-admin__products">${productLines}</div>
+                </div>
+
+                <div class="order-card-admin__row order-card-admin__row--total">
+                  <div class="order-card-admin__label">Total Pembayaran</div>
+                  <div class="order-card-admin__value order-card-admin__total">${formatRupiah(o.total)}</div>
+                </div>
+                
+              </div>
+
+              <div class="order-card-admin__right">
+                <div class="order-card-admin__status">
+                  <div class="order-card-admin__label">Status</div>
+                  <div class="order-card-admin__badge">${statusBadge(st)}</div>
+                </div>
+
+                <div class="order-card-admin__controls">
+                  <div class="order-card-admin__date">${dateText}</div>
+
+                  <div class="order-card-admin__select-wrap">
+                    <select id="${selectId}" class="order-status-select">
+                      ${STATUS_OPTIONS.map(x => `<option value="${x}" ${String(st)===x ? 'selected' : ''}>${x}</option>`).join('')}
+                    </select>
+                  </div>
+
+                  <button class="btn btn-primary" type="button" data-order-update="${o.id}" data-select="${selectId}">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Update
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+
+        wrap.querySelectorAll('button[data-order-update]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const orderId = btn.getAttribute('data-order-update');
+            const sel = btn.getAttribute('data-select');
+            const el = document.getElementById(sel);
+            if(!orderId || !el) return;
+            const nextStatus = el.value;
+
+            const all = getOrders();
+            const idx = all.findIndex(x => x.id === orderId);
+            if(idx < 0) return;
+
+            all[idx] = { ...all[idx], status: nextStatus };
+            setOrders(all);
+            render();
+          });
+        });
+      }
+
+      window.addEventListener('DOMContentLoaded', render);
+    })();
+  </script>
+</body>
+</html>
+

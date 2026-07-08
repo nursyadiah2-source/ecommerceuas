@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Produk Admin — Nura Baby Care</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style_admin.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar-admin">
+      <a class="brand" href="produk.html">
+        <img class="brand-logo" src="../images/logo/baby-logo.png" alt="EcoSmet Baby Care" onerror="this.style.display='none'" />
+        <div>
+          <div style="font-weight:1000">Nura Admin</div>
+          <div style="font-size:13px; color: rgba(43,27,34,.65); font-weight:900">Edit Produk</div>
+        </div>
+      </a>
+      <div class="admin-actions">
+        <button id="btnLogoutAdmin" class="btn btn-ghost" type="button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="card">
+        <div class="card-head card-intro">
+          <h1><i class="fa-solid fa-pen"></i> Edit Produk</h1>
+          <a class="btn btn-ghost" href="produk.html"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+        </div>
+
+        <form id="editProductForm" class="form" style="margin-top:10px">
+          <div class="grid2">
+            <div class="form-group">
+              <label for="nameEdit">Nama Produk</label>
+              <input id="nameEdit" name="name" type="text" required placeholder="Contoh: Lip Tint Rose Gold" />
+            </div>
+            <div class="form-group">
+              <label for="categoryIdEdit">Kategori</label>
+              <select id="categoryIdEdit" name="categoryId" required></select>
+            </div>
+          </div>
+
+          <div class="grid2">
+            <div class="form-group">
+              <label for="priceEdit">Harga (Rp)</label>
+              <input id="priceEdit" name="price" type="number" min="1" required placeholder="59000" />
+            </div>
+          </div>
+
+
+          <div class="grid2">
+            <div class="form-group">
+              <label for="ratingEdit">Rating (0-5)</label>
+              <input id="ratingEdit" name="rating" type="number" step="0.1" min="0" max="5" placeholder="4.6" />
+            </div>
+
+            <div class="form-group">
+              <label for="imgFileEdit">Ganti Gambar</label>
+              <input id="imgFileEdit" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" />
+              <div style="margin-top:10px">
+                <img id="imgPreviewEdit" src="" alt="Preview gambar" style="width:120px; height:120px; object-fit:contain; border-radius:16px; background:rgba(255,255,255,.6); border:1px dashed rgba(43,27,34,.18); display:none" />
+              </div>
+
+              <input id="img" name="img" type="hidden" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="descEdit">Deskripsi</label>
+            <textarea id="descEdit" name="desc" placeholder="Ceritakan keunggulan produk..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan</button>
+          </div>
+
+          <div id="editProductAlert" class="alert alert--danger" hidden></div>
+        </form>
+
+        <div class="modal" id="deleteProductModal" aria-hidden="true" role="dialog" aria-labelledby="deleteProductModalTitle">
+          <div class="modal__backdrop" data-modal-close="true"></div>
+          <div class="modal__panel" role="document">
+            <div class="modal__icon" aria-hidden="true"><i class="fa-solid fa-trash"></i></div>
+            <h3 class="modal__title" id="deleteProductModalTitle">Hapus Produk?</h3>
+            <p class="modal__desc">Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.</p>
+            <div class="modal__actions">
+              <button class="btn btn-ghost" type="button" data-modal-close="true"><i class="fa-solid fa-xmark"></i> Batal</button>
+              <button class="btn btn-danger" type="button" id="confirmDeleteBtn"><i class="fa-solid fa-trash"></i> Ya, Hapus</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+    <footer style="padding:18px 0; text-align:center; color:rgba(43,27,34,.65); font-weight:900;">
+      © <span id="year"></span>
+      <a href="https://www.instagram.com/nrrrsydhh/" 
+        target="_blank"
+        style="color:inherit; text-decoration:none;">
+        Develop by Nurr
+      </a>
+    </footer>
+
+  <script src="script_admin.js"></script>
+</body>
+</html>
+

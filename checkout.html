@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout — Nura Baby Care</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main"><i class="fa-solid fa-arrow-down"></i> Lewati ke konten</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <div class="brand">
+        <img class="brand-logo" src="images/logo/baby-logo.png" alt="EcoSmet Baby Care" onerror="this.style.display='none'" />
+        <div class="brand-text">
+          <div class="brand-name">Nura</div>
+          <div class="brand-tag">Baby Care</div>
+        </div>
+      </div>
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav" aria-label="Navigasi Utama">
+        <a href="produk.html" class="nav-link"><i class="fa-solid fa-bag-shopping"></i> Produk</a>
+        <a href="keranjang.html" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a>
+        <a href="checkout.html" class="nav-link active"><i class="fa-solid fa-credit-card"></i> Checkout</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="userMenuBtn" aria-label="Menu pengguna" title="Akun">
+          <i class="fa-regular fa-user"></i>
+        </button>
+        <div class="user-menu" id="userMenu" hidden>
+          <div class="user-menu-header">
+            <div class="avatar"><i class="fa-solid fa-sparkles"></i></div>
+            <div>
+              <div class="user-menu-name" id="userMenuName">Pengguna</div>
+              <div class="user-menu-role" id="userMenuRole">-</div>
+            </div>
+          </div>
+          <div class="user-menu-links">
+            <a href="profile.html" class="user-menu-link" id="linkProfile"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+            <a href="admin/dashboard.html" class="user-menu-link" id="linkAdmin"><i class="fa-solid fa-shield-halved"></i> Admin Dashboard</a>
+            <button class="user-menu-link btn-link" id="btnLogout" type="button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+          </div>
+        </div>
+
+        <a class="btn btn-primary" href="login.html" id="linkLogin"><i class="fa-solid fa-right-to-bracket"></i> Masuk</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <aside class="mobile-drawer" id="mobileDrawer">
+      <button class="drawer-close" id="drawerClose">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <a href="index.html"><i class="fa-solid fa-house"></i> Beranda</a>
+      <a href="produk.html"><i class="fa-solid fa-bag-shopping"></i> Produk</a>
+      <a href="keranjang.html"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a>
+    </aside>
+
+  <main id="main" class="container page">
+    <div class="checkout-layout">
+      <section class="checkout-column">
+        <form id="checkoutForm" class="form checkout-form">
+          <section class="card card--white">
+            <div class="card-head">
+              <h1><i class="fa-solid fa-truck-fast"></i> Data Penerima</h1>
+            </div>
+            <!-- Data Penerima (alamat tersimpan untuk login, form manual untuk belum login) -->
+            <div id="receiverPickerArea">
+              <!-- Login: Ringkasan Alamat (card marketplace) -->
+              <div id="receiverLoginCardArea" class="receiver-login" hidden>
+
+                <div class="receiver-card-wrap">
+                  <div id="receiverAddressCard" class="receiver-address-card" role="button" tabindex="0" aria-label="Pilih alamat">
+                    <div class="receiver-card-main">
+                      <div class="receiver-card-top">
+                        <span class="receiver-card-pin"><i class="fa-solid fa-location-dot"></i> 📍 Alamat Pengiriman</span>
+                        <span id="receiverPrimaryBadge" class="receiver-primary-badge" hidden>Alamat Utama</span>
+                      </div>
+
+
+                      <div class="receiver-card-line">
+                        <div class="receiver-label">Nama Penerima</div>
+                        <div id="rcRecipientName" class="receiver-value">-</div>
+                      </div>
+                      <div class="receiver-card-line">
+                        <div class="receiver-label">Nomor Telepon</div>
+                        <div id="rcRecipientPhone" class="receiver-value">-</div>
+                      </div>
+                      <div class="receiver-card-line">
+                        <div class="receiver-label">Alamat</div>
+                        <div id="rcFullAddress" class="receiver-value receiver-value--multiline">-</div>
+                      </div>
+
+                      <div class="receiver-card-line" id="rcTagWrap" hidden>
+                        <div class="receiver-label">Patokan</div>
+                        <div id="rcTag" class="receiver-value">-</div>
+                      </div>
+
+                      <!-- hidden snapshot fields used by JS (keep ids) -->
+                      <div class="receiver-card-grid receiver-card-grid--hidden" aria-hidden="true">
+                        <div class="receiver-card-line">
+                          <div class="receiver-label">Kelurahan, Kecamatan</div>
+                          <div id="rcVillageDistrict" class="receiver-value">-</div>
+                        </div>
+                        <div class="receiver-card-line">
+                          <div class="receiver-label">Kota/Kabupaten, Kode Pos</div>
+                          <div id="rcCityPostal" class="receiver-value">-</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="receiver-card-chevron" id="receiverCardChevron" hidden>
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+
+                  <div class="form-actions" style="justify-content:flex-end; margin-top: 14px;">
+                    <a class="btn btn-ghost" href="profile.html" id="manageAddressesBtn"><i class="fa-solid fa-gear"></i> Kelola Alamat</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal picker alamat tersimpan (Login, >1 alamat) -->
+              <div class="modal" id="savedAddressesModal" hidden>
+                <div class="modal-card">
+                  <div class="modal-header">
+                    <div>
+                      <h3>Pilih Alamat</h3>
+                      <p class="muted">Pilih alamat pengiriman yang ingin digunakan.</p>
+                    </div>
+                    <button type="button" class="icon-btn" id="closeSavedAddressesModal" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+                  </div>
+
+                  <div id="savedAddressesList" class="saved-addresses-list"></div>
+                  <div class="muted mt-12" id="savedAddressesEmpty" hidden>Belum ada alamat tersimpan.</div>
+                </div>
+              </div>
+
+              <!-- Login: fallback hidden readonly (deprecated) -->
+              <div id="receiverReadOnlyArea" class="receiver-readonly" hidden></div>
+            </div>
+
+            <!-- Belum login: form manual -->
+            <div id="receiverManualArea" class="receiver-manual">
+              <div class="grid2">
+                <div class="form-group">
+                  <label for="fullName">Nama Penerima</label>
+                  <input id="fullName" name="fullName" type="text" placeholder="Nama" required />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Nomor HP</label>
+                  <input id="phone" name="phone" type="tel" placeholder="08xxxxxxxx" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="address">Alamat Lengkap</label>
+                <textarea id="address" name="address" rows="4" placeholder="Alamat lengkap" required></textarea>
+              </div>
+
+              <div class="grid2">
+                <div class="form-group">
+                  <label for="city">Kota/Kabupaten</label>
+                  <input id="city" name="city" type="text" placeholder="Kota/Kabupaten" required />
+                </div>
+                <div class="form-group">
+                  <label for="district">Kecamatan</label>
+                  <input id="district" name="district" type="text" placeholder="Kecamatan" required />
+                </div>
+              </div>
+
+              <div class="grid2">
+                <div class="form-group">
+                  <label for="village">Kelurahan/Desa</label>
+                  <input id="village" name="village" type="text" placeholder="Kelurahan/Desa" required />
+                </div>
+                <div class="form-group">
+                  <label for="postalCode">Kode Pos</label>
+                  <input id="postalCode" name="postalCode" type="text" inputmode="numeric" placeholder="Kode Pos" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="tag">Patokan (opsional)</label>
+                <input id="tag" name="tag" type="text" placeholder="Misalnya: dekat minimarket" />
+              </div>
+            </div>
+          </section>
+
+          <section class="card card--white">
+            <div class="card-head">
+              <h2><i class="fa-solid fa-basket-shopping"></i> Pesanan Anda</h2>
+            </div>
+            <div id="checkoutProducts" class="checkout-products"></div>
+          </section>
+
+          <section class="card card--white voucher-panel">
+            <div class="card-head">
+              <h2><i class="fa-solid fa-ticket"></i> Voucher</h2>
+            </div>
+            <div class="voucher-current" id="voucherCurrent">Pilih voucher atau masukkan kode untuk potongan tambahan.</div>
+            <div class="form-group">
+              <label for="voucherCode">Kode Voucher</label>
+              <div class="input-icon">
+                <input id="voucherCode" name="voucherCode" type="text" placeholder="Misal: WELCOME10" />
+                <button class="btn btn-ghost btn-mini" type="button" id="applyVoucherBtn">Gunakan</button>
+              </div>
+              <div class="muted" id="voucherHint">Voucher akan berlaku saat syarat terpenuhi.</div>
+            </div>
+            <button class="btn btn-soft btn-block" type="button" id="openVoucherModal"><i class="fa-solid fa-tags"></i> Lihat Voucher</button>
+          </section>
+
+          <section class="card card--white payment-panel">
+            <div class="card-head">
+              <h2><i class="fa-solid fa-credit-card"></i> Metode Pembayaran</h2>
+            </div>
+            <div class="payment-method-select">
+              <label for="paymentMethodSelect">Pilih Metode Pembayaran</label>
+              <select id="paymentMethodSelect" name="paymentMethod">
+                <option value="qris">QRIS</option>
+                <option value="va_bca">Virtual Account (BCA)</option>
+                <option value="va_mandiri">Virtual Account (Mandiri)</option>
+                <option value="va_bri">Virtual Account (BRI)</option>
+                <option value="va_bni">Virtual Account (BNI)</option>
+                <option value="seabank">Bank Digital (SeaBank)</option>
+                <option value="e_gopay">E-Wallet (GoPay)</option>
+                <option value="e_dana">E-Wallet (DANA)</option>
+                <option value="e_ovo">E-Wallet (OVO)</option>
+              </select>
+            </div>
+            <div class="payment-details" id="paymentDetails"></div>
+          </section>
+
+          <section class="card card--white shipping-panel">
+            <div class="card-head">
+              <h2><i class="fa-solid fa-truck-moving"></i> Jenis Pengiriman</h2>
+            </div>
+            <div class="payment-grid" id="shippingGrid">
+              <label class="ship-option">
+                <input type="radio" name="shippingOption" value="reguler" checked />
+                <span class="ship-ui"><strong>Reguler</strong> <small>Rp 10.000 • 2-3 hari</small></span>
+              </label>
+              <label class="ship-option">
+                <input type="radio" name="shippingOption" value="express" />
+                <span class="ship-ui"><strong>Express</strong> <small>Rp 20.000 • 1-2 hari</small></span>
+              </label>
+              <label class="ship-option">
+                <input type="radio" name="shippingOption" value="same_day" />
+                <span class="ship-ui"><strong>Same Day</strong> <small>Rp 35.000 • Hari ini</small></span>
+              </label>
+            </div>
+          </section>
+
+          <div class="alert" id="checkoutAlert" hidden></div>
+        </form>
+      </section>
+
+      <aside class="card card--summary summary-aside">
+        <div class="summary-title"><i class="fa-solid fa-receipt"></i> Ringkasan Pembayaran</div>
+        <div class="summary-line">Jumlah Produk <span class="summary-val" id="sumItems">-</span></div>
+        <div class="summary-line">Subtotal <span class="summary-val" id="sumSubtotal">-</span></div>
+        <div class="summary-line">Diskon <span class="summary-val" id="sumDiscount">-</span></div>
+        <div class="summary-line">Ongkir <span class="summary-val" id="sumShipping">-</span></div>
+        <div class="summary-total">Total Pembayaran <span id="sumTotal">-</span></div>
+
+        <div class="summary-actions">
+          <button class="btn btn-primary btn-checkout-now" type="submit" form="checkoutForm">🛍️ Checkout Sekarang</button>
+          <a class="btn btn-ghost btn-block" href="keranjang.html">Kembali ke Keranjang</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+      <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand">👶 Nura Baby Care</div>
+
+          <p class="muted">
+            Menemani setiap momen tumbuh kembang si kecil dengan
+            produk bayi berkualitas, aman, dan terpercaya untuk keluarga Indonesia.
+          </p>
+
+          <a href="produk.html" class="btn btn-primary" style="margin-top:18px;">
+            Jelajahi Produk
+          </a>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-title">Menu</div>
+
+            <a href="index.html">
+              <i class="fa-solid fa-house"></i> Beranda
+            </a>
+
+            <a href="produk.html">
+              <i class="fa-solid fa-bag-shopping"></i> Produk
+            </a>
+
+            <a href="keranjang.html">
+              <i class="fa-solid fa-cart-shopping"></i> Keranjang
+            </a>
+
+            <a href="profile.html">
+              <i class="fa-solid fa-gear"></i> Pengaturan dan Privasi
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-social">
+          <div class="footer-title">Ikuti Kami</div>
+          <div class="social-row">
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+          </div>
+          <p class="muted" style="margin-top:20px;">
+            📍 Indonesia
+          </p>
+          <p class="muted">
+            ✉ support@nurababycare.com
+          </p>
+          <div class="muted" style="margin-top:18px;">
+            © <span id="year"></span> Nura Baby Care
+          </div>
+          <small class="muted">
+              Made by nur
+          </small>
+        </div>
+      </div>
+    </footer>
+
+  <div class="modal-backdrop" id="voucherModalBackdrop" hidden></div>
+  <div class="modal" id="voucherModal" hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>Pilih Voucher</h3>
+          <p class="muted">Gunakan voucher yang sesuai untuk pesananmu.</p>
+        </div>
+        <button type="button" class="icon-btn" id="closeVoucherModal" aria-label="Tutup voucher"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="voucher-list" id="voucherList"></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="nuraPayModalBackdrop" hidden></div>
+  <div class="modal" id="nuraPayModal" hidden>
+    <div class="modal-card nura-pay-card">
+      <div class="modal-header nura-pay-header">
+        <div class="nura-pay-brand">
+          <div class="nura-pay-brand-mark"><i class="fa-solid fa-shield-halved"></i></div>
+          <div>
+            <h3>NuraPay</h3>
+            <p class="muted">Simulasi Payment Gateway</p>
+          </div>
+        </div>
+        <button type="button" class="icon-btn nura-pay-close" id="closeNuraPayModal" aria-label="Tutup NuraPay"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="nura-pay-body">
+        <div class="nura-pay-layout">
+          <aside class="nura-pay-sidebar">
+            <div class="nura-pay-sidebar-card">
+              <div class="nura-pay-sidebar-icon"><i class="fa-solid fa-receipt"></i></div>
+              <div class="nura-pay-sidebar-label">Nomor Invoice</div>
+              <div class="nura-pay-sidebar-value nura-invoice-id" id="invoice">-</div>
+            </div>
+
+            <div class="nura-pay-sidebar-card">
+              <div class="nura-pay-sidebar-icon nura-pay-sidebar-icon--blue"><i class="fa-solid fa-wallet"></i></div>
+              <div class="nura-pay-sidebar-label">Total Pembayaran</div>
+              <div class="nura-pay-sidebar-value nura-total" id="total">-</div>
+            </div>
+
+            <div class="nura-pay-sidebar-card">
+              <div class="nura-pay-sidebar-icon nura-pay-sidebar-icon--danger"><i class="fa-solid fa-clock"></i></div>
+              <div class="nura-pay-sidebar-label">Waktu Tersisa</div>
+              <div class="nura-countdown" id="countdown">15:00</div>
+              <div class="nura-pay-sidebar-meta">Selesaikan sebelum batas waktu</div>
+            </div>
+
+            <div class="nura-pay-sidebar-card">
+              <div class="nura-pay-sidebar-icon nura-pay-sidebar-icon--warning"><i class="fa-solid fa-hourglass-half"></i></div>
+              <div class="nura-pay-sidebar-label">Status Pembayaran</div>
+              <div class="nura-pay-status-pill">Menunggu Pembayaran</div>
+            </div>
+
+            <div class="nura-pay-sidebar-card">
+              <div class="nura-pay-sidebar-icon nura-pay-sidebar-icon--info"><i class="fa-solid fa-credit-card"></i></div>
+              <div class="nura-pay-sidebar-label">Metode Pembayaran</div>
+              <div class="nura-pay-sidebar-value nura-method">-</div>
+            </div>
+
+            <div class="nura-pay-security">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Transaksi kamu aman dan terenkripsi.</span>
+            </div>
+          </aside>
+
+          <div class="nura-pay-content">
+            <div class="nura-pay-content-panel">
+              <div class="nura-pay-content-head">
+                <div>
+                  <div class="nura-pay-content-kicker">Instruksi Pembayaran</div>
+                  <h4>Detail transaksi</h4>
+                </div>
+                <div class="nura-pay-content-badge">Secure Checkout</div>
+              </div>
+
+              <div class="nura-payment-detail" id="nuraPaymentDetail"></div>
+              <div class="nura-pay-notice" id="nuraPayNotice">Silakan selesaikan pembayaran melalui instruksi di atas.</div>
+              <div class="nura-pay-actions">
+                <button class="btn btn-soft" type="button" id="nuraPayCancelBtn">Batalkan Pembayaran</button>
+                <button class="btn btn-primary" type="button" id="nuraPayConfirmBtn">Saya Sudah Bayar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      initAuthGuards();
+      initUserMenu();
+      renderCheckoutPage();
+
+      // close saved-address modal
+      const modal = document.getElementById('savedAddressesModal');
+      const closeBtn = document.getElementById('closeSavedAddressesModal');
+      if(modal && closeBtn){
+        closeBtn.addEventListener('click', () => {
+          modal.hidden = true;
+          modal.classList.remove('modal-open');
+        });
+      }
+
+      const savedListModal = document.getElementById('savedAddressesModal');
+      if(savedListModal){
+        const savedBackdrop = document.getElementById('modalBackdrop');
+        savedBackdrop && savedBackdrop.addEventListener('click', () => {
+          if(!savedListModal.hidden) {
+            savedListModal.hidden = true;
+            savedListModal.classList.remove('modal-open');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+</body>
+</html>
+
+
+

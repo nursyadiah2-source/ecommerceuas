@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login — Nura Baby Care</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main"><i class="fa-solid fa-arrow-down"></i> Lewati ke konten</a>
+
+  <main id="main" class="auth-wrap">
+    <div class="auth-layout-2col">
+
+      <section class="auth-right" aria-label="Form login">
+        <div class="auth-form-card">
+          <div class="auth-head">
+            <h1>Selamat Datang Kembali</h1> 
+            <p class="muted">Masuk untuk melanjutkan belanja dan akses profile.</p>
+
+            <p class="admin-login-link">
+            Login sebagai Admin?
+            <a href="admin/login_admin.html">Klik di sini</a>
+          </p>
+          </div>
+
+          <form id="loginForm" class="form">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-at" aria-hidden="true"></i>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="contoh@email.com" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="checkbox">
+                <input type="checkbox" id="rememberMe" />
+                <span>Ingat saya</span>
+              </label>
+              <a href="#" class="link">Lupa Password?</a>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary btn-block auth-submit" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+            </div>
+
+            <div class="form-actions">
+              <a href="index.html" class="btn btn-ghost btn-block"><i class="fa-solid fa-arrow-left"></i>Kembali</a>
+            </div>
+
+            <p class="auth-switch">
+              Belum punya akun? <a class="link" href="register.html">Daftar Sekarang</a>
+            </p>
+
+            <div class="alert" id="loginAlert" hidden></div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+
+      <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand">👶 Nura Baby Care</div>
+
+          <p class="muted">
+            Menemani setiap momen tumbuh kembang si kecil dengan
+            produk bayi berkualitas, aman, dan terpercaya untuk keluarga Indonesia.
+          </p>
+
+          <a href="produk.html" class="btn btn-primary" style="margin-top:18px;">
+            Jelajahi Produk
+          </a>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-title">Menu</div>
+
+            <a href="index.html">
+              <i class="fa-solid fa-house"></i> Beranda
+            </a>
+
+            <a href="produk.html">
+              <i class="fa-solid fa-bag-shopping"></i> Produk
+            </a>
+
+            <a href="keranjang.html">
+              <i class="fa-solid fa-cart-shopping"></i> Keranjang
+            </a>
+
+            <a href="profile.html">
+              <i class="fa-solid fa-gear"></i> Pengaturan dan Privasi
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-social">
+          <div class="footer-title">Ikuti Kami</div>
+          <div class="social-row">
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+          </div>
+          <p class="muted" style="margin-top:20px;">
+            📍 Indonesia
+          </p>
+          <p class="muted">
+            ✉ support@nurababycare.com
+          </p>
+          <div class="muted" style="margin-top:18px;">
+            © <span id="year"></span> Nura Baby Care
+          </div>
+          <small class="muted">
+              Made by nur
+          </small>
+        </div>
+      </div>
+    </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      initAuthGuards();
+      initCustomerLogin();
+    });
+  </script>
+</body>
+</html>
+
+
+

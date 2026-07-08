@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register — EcoSmet</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main"><i class="fa-solid fa-arrow-down"></i> Lewati ke konten</a><div class="nez-watermark"></div>
+
+  <header class="site-header site-header--simple">
+    <!-- <div class="container header-simple">
+      <a href="index.html" class="brand" aria-label="Nura Baby Care">
+        <img class="brand-logo" src="images/logo/baby-logo.png" alt="EcoSmet Baby Care" onerror="this.style.display='none'" />
+        <div class="brand-text">
+          <div class="brand-name">Nura</div>
+          <div class="brand-tag">Baby Care</div>
+        </div>
+      </a>
+      <div class="header-right">
+        <a class="btn btn-soft" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Masuk</a>
+      </div>
+    </div> -->
+  </header>
+
+  <main id="main" class="auth-wrap">
+    <div class="auth-layout-2col">
+      <section class="auth-right" aria-label="Form register">
+        <div class="auth-form-card">
+          <div class="auth-head">
+            <h1>Mulai Buat Akun</h1>
+            <p class="muted">Buat akun untuk menyimpan data pesanan dan keranjang.</p>
+          </div>
+
+          <form id="registerForm" class="form">
+            <div class="form-group">
+              <label for="name">Nama Lengkap</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-user" aria-hidden="true"></i>
+                <input id="name" name="name" type="text" autocomplete="name" placeholder="Nama lengkap" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-at" aria-hidden="true"></i>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="contoh@email.com" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Nomor HP</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="08xxxxxxxx" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Minimal 6 karakter" required minlength="6" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">Konfirmasi Password</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                <input id="confirmPassword" type="password" autocomplete="new-password" placeholder="Ulangi password" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox">
+                <input type="checkbox" id="agreeTerms" />
+                <span>Saya menyetujui persyaratan & kebijakan.</span>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary btn-block auth-submit" type="submit"><i class="fa-solid fa-user-plus"></i> Daftar</button>
+            </div>
+
+            <p class="auth-switch">
+              Sudah punya akun? <a class="link" href="login.html">Masuk</a>
+            </p>
+
+            <div class="alert" id="registerAlert" hidden></div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+
+      <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand">👶 Nura Baby Care</div>
+
+          <p class="muted">
+            Menemani setiap momen tumbuh kembang si kecil dengan
+            produk bayi berkualitas, aman, dan terpercaya untuk keluarga Indonesia.
+          </p>
+
+          <a href="produk.html" class="btn btn-primary" style="margin-top:18px;">
+            Jelajahi Produk
+          </a>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-title">Menu</div>
+
+            <a href="index.html">
+              <i class="fa-solid fa-house"></i> Beranda
+            </a>
+
+            <a href="produk.html">
+              <i class="fa-solid fa-bag-shopping"></i> Produk
+            </a>
+
+            <a href="keranjang.html">
+              <i class="fa-solid fa-cart-shopping"></i> Keranjang
+            </a>
+
+            <a href="profile.html">
+              <i class="fa-solid fa-gear"></i> Pengaturan dan Privasi
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-social">
+          <div class="footer-title">Ikuti Kami</div>
+          <div class="social-row">
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+          </div>
+          <p class="muted" style="margin-top:20px;">
+            📍 Indonesia
+          </p>
+          <p class="muted">
+            ✉ support@nurababycare.com
+          </p>
+          <div class="muted" style="margin-top:18px;">
+            © <span id="year"></span> Nura Baby Care
+          </div>
+          <small class="muted">
+            Made by nur
+          </small>
+        </div>
+      </div>
+    </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      initAuthGuards();
+      initCustomerRegister();
+    });
+  </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Admin — Nura Baby Care</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style_admin.css" />
+</head>
+<body>
+  <input type="checkbox" id="adminSidebarToggle" class="admin-sidebar-toggle" hidden />
+
+  <header class="site-header">
+    <div class="container navbar-admin">
+      <div class="brand" aria-label="Nura Baby Care">
+        <img class="brand-logo" src="../images/logo/baby-logo.png" alt="Nura Baby Care" onerror="this.style.display='none'" />
+        <div>
+          <div class="brand-title">Nura Baby Care</div>
+          <div class="brand-subtitle">Backoffice Admin</div>
+        </div>
+      </div>
+
+      <div class="admin-actions">
+        <button class="icon-btn btn-hamburger" type="button" aria-label="Buka menu" for="adminSidebarToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <span class="hide-sm admin-greeting">Halo, <span id="adminName">-</span></span>
+        <button id="btnLogoutAdmin" class="btn btn-ghost" type="button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="admin-sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-brand">
+        <div class="sidebar-badge"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <div class="sidebar-brand-name">Nura Baby Care</div>
+          <div class="sidebar-brand-role">Admin</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Menu Admin">
+      <a class="sidebar-item active" href="dashboard.html" data-tab="dashboard">
+        <span class="sidebar-icon">📊</span>
+        <span class="sidebar-label">Dashboard</span>
+      </a>
+      <a class="sidebar-item" href="produk.html" data-tab="produk">
+        <span class="sidebar-icon">📦</span>
+        <span class="sidebar-label">Produk</span>
+      </a>
+      <a class="sidebar-item" href="stok.html" data-tab="stok">
+        <span class="sidebar-icon">📥</span>
+        <span class="sidebar-label">Stok</span>
+      </a>
+      <a class="sidebar-item" href="pesanan.html" data-tab="pesanan">
+        <span class="sidebar-icon">📋</span>
+        <span class="sidebar-label">Pesanan</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="mobile-overlay" aria-hidden="true"></div>
+
+  <main class="admin-main" id="main">
+    <div class="container admin-container">
+      <section class="admin-hero">
+        <div class="admin-hero-top">
+          <div>
+            <div class="admin-hero-eyebrow"><i class="fa-solid fa-wand-magic-sparkles"></i> Selamat Datang Admin</div>
+            <h1 class="admin-hero-title">Dashboard</h1>
+          </div>
+        </div>
+
+        <div class="admin-activity">
+          <div class="activity-card">
+            <div class="activity-title"><i class="fa-solid fa-chart-line"></i> Ringkasan aktivitas toko</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Statistik">
+        <article class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-boxes"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Total Produk</div>
+            <div class="stat-value" id="statTotalProduk">-</div>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-receipt"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Total Pesanan</div>
+            <div class="stat-value" id="statTotalPesanan">-</div>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Total Pendapatan</div>
+            <div class="stat-value" id="statTotalPendapatan">-</div>
+          </div>
+        </article>
+
+        <article class="stat-card stat-card--warning">
+          <div class="stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="stat-body">
+            <div class="stat-label">Produk dengan Stok Menipis</div>
+            <div class="stat-value" id="statStokMenipis">-</div>
+          </div>
+        </article>
+      </section>
+
+      <section class="admin-section admin-section--products">
+        <div class="section-head">
+          <h2><i class="fa-solid fa-box"></i> Produk</h2>
+        </div>
+
+        <div class="card table-card">
+          <div class="table" style="margin-top:14px">
+            <div class="table-row table-head">
+              <div>Produk</div>
+              <div>Harga</div>
+              <div class="hide-sm">Stok</div>
+              <div class="hide-md">Rating</div>
+              <div style="text-align:right">Aksi</div>
+            </div>
+            <div id="adminProductList"></div>
+          </div>
+        </div>
+      </section>
+
+      <script>
+        (function(){
+          const el1 = document.getElementById('adminName');
+          const el2 = document.getElementById('adminName2');
+          if(el1 && el2){ el2.textContent = el1.textContent || '-'; }
+        })();
+      </script>
+    </div>
+  </main>
+
+  <footer style="padding:18px 0; text-align:center; color:rgba(43,27,34,.65); font-weight:900;">
+      © <span id="year"></span>
+      <a href="https://www.instagram.com/nrrrsydhh/" 
+        target="_blank"
+        style="color:inherit; text-decoration:none;">
+        Develop by Nurr
+      </a>
+    </footer>
+
+      <label class="admin-sidebar-backdrop" for="adminSidebarToggle" aria-hidden="true"></label>
+
+
+  <script src="script_admin.js"></script>
+  <script src="sidebar_mobile_fix.js"></script>
+
+
+
+  <script>
+    // Statistik dari LocalStorage (produk & stok menipis) + pesanan dari ecosmet_orders.
+    // Menghitung Total Pendapatan hanya dari pesanan dengan status 'Selesai'.
+    (function(){
+      try{
+        const LS = {
+          PRODUCTS: 'ecosmet_products',
+          ORDERS: 'ecosmet_orders'
+        };
+
+        const safeParse = (raw, fallback) => { try{ return JSON.parse(raw || '') ?? fallback; }catch{ return fallback; } };
+
+        const totalProdukEl = document.getElementById('statTotalProduk');
+        const stokMenipisEl = document.getElementById('statStokMenipis');
+        const totalPesananEl = document.getElementById('statTotalPesanan');
+        const totalPendapatanEl = document.getElementById('statTotalPendapatan');
+
+        function formatRupiah(n){
+          const num = Number(n||0) || 0;
+          return 'Rp ' + num.toLocaleString('id-ID');
+        }
+
+        function computeAndRender(){
+          const products = safeParse(localStorage.getItem(LS.PRODUCTS), []);
+          const orders = safeParse(localStorage.getItem(LS.ORDERS), []);
+
+          if(totalProdukEl) totalProdukEl.textContent = String(Array.isArray(products) ? products.length : 0);
+
+          const lowThreshold = 5;
+          const lowCount = (Array.isArray(products) ? products : [])
+            .filter(p => Number(p?.stock ?? 0) > 0 && Number(p?.stock ?? 0) <= lowThreshold)
+            .length;
+          if(stokMenipisEl) stokMenipisEl.textContent = String(lowCount);
+
+          const totalOrders = Array.isArray(orders) ? orders.length : 0;
+          if(totalPesananEl) totalPesananEl.textContent = String(totalOrders);
+
+          // Hitung total pendapatan hanya dari pesanan dengan status 'Selesai'
+          let totalPendapatan = 0;
+          if(Array.isArray(orders)){
+            for(const o of orders){
+              const st = String(o?.status || '').trim();
+              if(st === 'Selesai'){
+                const t = Number(o?.total || 0) || 0;
+                totalPendapatan += t;
+              }
+            }
+          }
+
+          if(totalPendapatanEl) totalPendapatanEl.textContent = formatRupiah(totalPendapatan);
+        }
+
+        // jalankan sekali saat load
+        computeAndRender();
+
+        // Jika localStorage berubah (mis. admin mengubah status di tab Pesanan dan menekan Update),
+        // event storage akan dipicu di tab lain -> update statistik otomatis.
+        window.addEventListener('storage', (e) => {
+          if(!e) return;
+          if(e.key === LS.ORDERS || e.key === LS.PRODUCTS || e.key === null){
+            computeAndRender();
+          }
+        });
+
+      }catch(e){
+        // keep '-' jika gagal, tapi umumnya tetap akan terisi.
+      }
+    })();
+  </script>
+</body>
+</html>
+

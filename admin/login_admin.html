@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Admin — Nura Baby Care</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style_admin.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar-admin">
+      <a class="brand" href="../index.html">
+        <img class="brand-logo" src="../images/logo/baby-logo.png" alt="Nura Baby Care" onerror="this.style.display='none'" />
+        <div>
+          <div style="font-weight:1000">Nura Baby Care</div>
+          <div style="font-size:13px; color: rgba(43,27,34,.65); font-weight:900">Admin Dashboard</div>
+        </div>
+      </a>
+      <div class="admin-actions">
+        <a class="btn btn-ghost" href="../login.html"><i class="fa-solid fa-house"></i> Customer</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="auth-wrap">
+    <div class="auth-layout-2col">
+      <div class="auth-form-card card-fade-in">
+        <div class="auth-head">
+          <h1>Selamat Datang Admin</h1>
+          <p class="muted">Masuk untuk mengelola produk, pesanan, dan data toko Nura Baby Care.</p>
+        </div>
+
+        <form id="loginAdminForm" class="form" style="margin-top: 14px">
+          <div class="form-group">
+            <label for="email">Email Admin</label>
+            <div class="input-icon">
+              <i class="fa-solid fa-at" aria-hidden="true"></i>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="contoh@email.com" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-icon">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i>
+              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+            </div>
+          </div>
+
+          <button class="btn btn-primary" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Masuk sebagai Admin</button>
+
+          <div id="loginAdminAlert" class="alert alert--danger" hidden></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer style="padding:18px 0; text-align:center; color:rgba(43,27,34,.65); font-weight:900;">
+      © <span id="year"></span>
+      <a href="https://www.instagram.com/nrrrsydhh/" 
+        target="_blank"
+        style="color:inherit; text-decoration:none;">
+        Develop by Nurr
+
+      </a>
+       <div class="footer-col">
+          <div class="footer-title">Backoffice Management System</div>
+        </div>
+    </footer>
+
+
+  <script src="script_admin.js"></script>
+</body>
+</html>
+

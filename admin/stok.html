@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manajemen Stok Admin — Nura Baby Care</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style_admin.css" />
+</head>
+<body>
+  <input type="checkbox" id="adminSidebarToggle" class="admin-sidebar-toggle" hidden />
+
+  <header class="site-header">
+    <div class="container navbar-admin">
+      <div class="brand" aria-label="Nura Baby Care">
+        <img class="brand-logo" src="../images/logo/baby-logo.png" alt="Nura Baby Care" onerror="this.style.display='none'" />
+        <div>
+          <div class="brand-title">Nura Baby Care</div>
+          <div class="brand-subtitle">Backoffice Admin</div>
+        </div>
+      </div>
+
+      <div class="admin-actions">
+        <button class="icon-btn btn-hamburger" type="button" aria-label="Buka menu" for="adminSidebarToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="hide-sm admin-greeting">Halo, <span id="adminName">-</span></span>
+        <button id="btnLogoutAdmin" class="btn btn-ghost" type="button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="admin-sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-brand">
+        <div class="sidebar-badge"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <div class="sidebar-brand-name">Nura Baby Care</div>
+          <div class="sidebar-brand-role">Admin</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Menu Admin">
+      <a class="sidebar-item" href="dashboard.html"><span class="sidebar-icon">📊</span><span class="sidebar-label">Dashboard</span></a>
+      <a class="sidebar-item" href="produk.html"><span class="sidebar-icon">📦</span><span class="sidebar-label">Produk</span></a>
+      <a class="sidebar-item active" href="stok.html"><span class="sidebar-icon">📥</span><span class="sidebar-label">Stok</span></a>
+      <a class="sidebar-item" href="pesanan.html"><span class="sidebar-icon">📋</span><span class="sidebar-label">Pesanan</span></a>
+    </nav>
+  </aside>
+
+  <label class="admin-sidebar-backdrop" for="adminSidebarToggle" aria-hidden="true"></label>
+  <div class="mobile-overlay" aria-hidden="true"></div>
+
+  <main class="admin-main" id="main">
+    <div class="container admin-container">
+      <section class="admin-hero">
+        <div class="section-head" style="margin-bottom:10px;">
+          <h2><i class="fa-solid fa-warehouse"></i> Manajemen Stok</h2>
+          <div class="section-sub">Tambahkan stok untuk produk yang sudah tersedia.</div>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <div class="card" style="padding: 18px 18px 20px;">
+          <div class="card-head" style="margin-bottom: 10px;">
+            <div>
+              <div style="font-weight:1200; font-size:18px; display:flex; gap:10px; align-items:center;">
+                <i class="fa-solid fa-plus-circle" style="color: rgba(37,99,235,.95)"></i>
+                Tambah Stok
+              </div>
+              <div class="section-sub" style="margin-top:6px;">Pilih produk, masukkan jumlah, lalu klik tombol tambah.</div>
+            </div>
+          </div>
+
+          <form id="addStockForm" class="form" autocomplete="off">
+            <div class="form-group">
+              <label>Produk</label>
+
+              <div class="stock-dd" id="stockProductDropdown">
+                <input type="hidden" id="selectedProductId" name="productId" />
+
+                <button type="button" class="stock-dd__toggle btn-like" id="productDropdownToggle" aria-haspopup="listbox" aria-expanded="false">
+                  <span class="stock-dd__toggleText" id="productDropdownPlaceholder">Pilih produk...</span>
+                  <span class="stock-dd__chev" aria-hidden="true">▾</span>
+                </button>
+
+                <div class="stock-dd__panel" role="dialog" aria-hidden="true">
+                  <div class="stock-dd__searchWrap">
+                    <input type="text" id="productSearch" class="stock-dd__search" placeholder="Cari produk..." />
+                    <button type="button" class="stock-dd__clear" id="productSearchClear" aria-label="Bersihkan pencarian">✕</button>
+                  </div>
+
+                  <div class="stock-dd__list" id="productDropdownList" role="listbox" aria-label="Daftar produk">
+                  </div>
+                </div>
+              </div>
+
+              <div id="productSelectHelp" class="muted" style="font-weight:900; font-size:13px; margin-top:8px; display:none;">
+                Silakan pilih produk.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Jumlah Tambahan</label>
+              <div class="stock-qty">
+                <button type="button" class="stock-qty__btn" id="qtyMinus" aria-label="Kurangi">-</button>
+                <input type="number" id="qtyAdd" name="qtyAdd" min="1" step="1" value="1" class="stock-qty__input" />
+                <button type="button" class="stock-qty__btn" id="qtyPlus" aria-label="Tambah">+</button>
+              </div>
+            </div>
+
+            <div class="card" style="padding: 14px 14px 14px; border-radius: 22px; margin-top: 6px; background: rgba(167,216,255,.08); border: 1px solid rgba(96,165,250,.16); box-shadow: none; display:none;" id="productInfoCard">
+              <div class="grid2" style="gap: 14px;">
+                <div class="form-group">
+                  <label>Nama Produk</label>
+                  <div id="infoProductName" class="stock-info__value">-</div>
+                </div>
+                <div class="form-group">
+                  <label>Kategori</label>
+                  <div id="infoProductCategory" class="stock-info__value">-</div>
+                </div>
+                <div class="form-group">
+                  <label>Harga</label>
+                  <div id="infoProductPrice" class="stock-info__value">-</div>
+                </div>
+                <div class="form-group">
+                  <label>Stok Saat Ini</label>
+                  <div id="infoProductStockNow" class="stock-info__value">-</div>
+                </div>
+              </div>
+
+              <div style="height: 10px;"></div>
+
+              <div class="grid2" style="gap: 14px;">
+                <div class="form-group">
+                  <label>Tambah</label>
+                  <div id="infoProductDelta" class="stock-info__value">+1</div>
+                </div>
+                <div class="form-group">
+                  <label>Stok Setelah Ditambah</label>
+                  <div id="infoProductStockAfter" class="stock-info__value stock-info__after">-</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Alert -->
+            <div id="addStockAlert" class="alert" style="display:none; margin-top: 10px;"></div>
+
+            <!-- Actions -->
+            <div class="form-actions" style="justify-content:flex-end;">
+              <button type="submit" class="btn btn-primary" id="btnAddStock">
+                <i class="fa-solid fa-plus"></i> + Tambah Stok
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer style="padding:18px 0; text-align:center; color:rgba(43,27,34,.65); font-weight:900;">
+      © <span id="year"></span>
+      <a href="https://www.instagram.com/nrrrsydhh/"
+        target="_blank"
+        style="color:inherit; text-decoration:none;">
+        Develop by Nurr
+      </a>
+    </footer>
+
+
+  <script src="script_admin.js"></script>
+  <script src="sidebar_mobile_fix.js"></script>
+
+  <script>
+    (function(){
+      const LS = {
+        PRODUCTS: 'ecosmet_products'
+      };
+
+      const $ = (id) => document.getElementById(id);
+
+      const safeParse = (raw, fallback) => {
+        try { return JSON.parse(raw); } catch { return fallback; }
+      };
+
+      const getProducts = () => safeParse(localStorage.getItem(LS.PRODUCTS), []);
+      const setProducts = (p) => localStorage.setItem(LS.PRODUCTS, JSON.stringify(p));
+
+      const fmtRupiah = (n) => {
+        const num = Number(n || 0);
+        return 'Rp ' + num.toLocaleString('id-ID').replace(',00','');
+      };
+
+      const dd = {
+        root: $('stockProductDropdown'),
+        toggle: $('productDropdownToggle'),
+        placeholder: $('productDropdownPlaceholder'),
+        panel: null,
+        list: $('productDropdownList'),
+        search: $('productSearch'),
+        clear: $('productSearchClear'),
+        hiddenId: $('selectedProductId')
+      };
+
+      const state = {
+        products: [],
+        selectedId: null
+      };
+
+      const info = {
+        card: $('productInfoCard'),
+        name: $('infoProductName'),
+        category: $('infoProductCategory'),
+        price: $('infoProductPrice'),
+        stockNow: $('infoProductStockNow'),
+        delta: $('infoProductDelta'),
+        stockAfter: $('infoProductStockAfter')
+      };
+
+      const qty = {
+        input: $('qtyAdd'),
+        plus: $('qtyPlus'),
+        minus: $('qtyMinus')
+      };
+
+      const alertEl = $('addStockAlert');
+      const productHelp = $('productSelectHelp');
+
+      function showAlert(type, msg){
+        if(!alertEl) return;
+        alertEl.style.display = 'block';
+        alertEl.className = 'alert ' + (type === 'success' ? 'alert--success' : 'alert--danger');
+        alertEl.textContent = msg;
+      }
+
+      function clearAlert(){
+        if(!alertEl) return;
+        alertEl.style.display = 'none';
+        alertEl.className = 'alert';
+        alertEl.textContent = '';
+      }
+
+      function openDropdown(){
+        if(!dd.root) return;
+        if(!dd.panel) dd.panel = dd.root.querySelector('.stock-dd__panel');
+        dd.panel.style.display = 'block';
+        dd.panel.setAttribute('aria-hidden', 'false');
+        dd.toggle.setAttribute('aria-expanded', 'true');
+        dd.search.focus();
+        renderDropdownList(dd.search.value || '');
+      }
+
+      function closeDropdown(){
+        if(!dd.root) return;
+        if(!dd.panel) dd.panel = dd.root.querySelector('.stock-dd__panel');
+        dd.panel.style.display = 'none';
+        dd.panel.setAttribute('aria-hidden', 'true');
+        dd.toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      function normalize(s){
+        return String(s || '').toLowerCase();
+      }
+
+      function productOptionHTML(p){
+        const stock = Number(p.stock ?? 0);
+        return `
+          <button type="button" class="stock-dd__item" data-pid="${p.id}" role="option" aria-selected="${state.selectedId === p.id}">
+            <div class="stock-dd__thumbWrap">
+              <img class="stock-dd__thumb" src="${p.img || ''}" alt="${p.name}" onerror="this.style.display='none'" />
+            </div>
+            <div class="stock-dd__meta">
+              <div class="stock-dd__name">${p.name}</div>
+              <div class="stock-dd__sub">Stok saat ini: <b>${stock}</b></div>
+            </div>
+          </button>
+        `;
+      }
+
+      function renderDropdownList(query){
+        const list = dd.list;
+        if(!list) return;
+
+        const q = normalize(query).trim();
+        const filtered = state.products.filter(p => !q || normalize(p.name).includes(q));
+
+        list.innerHTML = '';
+        if(!filtered.length){
+          list.innerHTML = '<div class="stock-dd__empty">Produk tidak ditemukan.</div>';
+          return;
+        }
+
+        filtered.forEach(p => list.insertAdjacentHTML('beforeend', productOptionHTML(p)));
+
+        list.querySelectorAll('.stock-dd__item').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const pid = btn.getAttribute('data-pid');
+            selectProduct(pid);
+            closeDropdown();
+          });
+        });
+      }
+
+      function selectProduct(pid){
+        const p = state.products.find(x => x.id === pid);
+        if(!p) return;
+        state.selectedId = pid;
+        dd.hiddenId.value = pid;
+
+        dd.placeholder.textContent = p.name;
+
+        // Fill info
+        const stockNow = Number(p.stock ?? 0);
+        info.card.style.display = 'block';
+        info.name.textContent = p.name;
+        info.category.textContent = p.categoryName || '-';
+        info.price.textContent = fmtRupiah(p.price || 0);
+        info.stockNow.textContent = stockNow;
+
+        updateDeltaAndAfter();
+      }
+
+      function clampPositiveInt(n){
+        const num = Number(n);
+        if(!Number.isFinite(num)) return 1;
+        const v = Math.floor(num);
+        return Math.max(1, v);
+      }
+
+      function updateDeltaAndAfter(){
+        if(!state.selectedId) return;
+        const p = state.products.find(x => x.id === state.selectedId);
+        if(!p) return;
+
+        const stockNow = Number(p.stock ?? 0);
+        const delta = clampPositiveInt(qty.input.value);
+
+        qty.input.value = String(delta);
+
+        info.delta.textContent = '+' + delta;
+        info.stockAfter.textContent = String(stockNow + delta);
+      }
+
+      function resetForm(){
+        state.selectedId = null;
+        dd.hiddenId.value = '';
+        dd.placeholder.textContent = 'Pilih produk...';
+        qty.input.value = '1';
+        info.card.style.display = 'none';
+        info.name.textContent = '-';
+        info.category.textContent = '-';
+        info.price.textContent = '-';
+        info.stockNow.textContent = '-';
+        info.delta.textContent = '+1';
+        info.stockAfter.textContent = '-';
+        clearAlert();
+        productHelp.style.display = 'none';
+      }
+
+      function syncProductsAndUI(){
+        // refresh products list from LocalStorage so dropdown/stock is accurate
+        state.products = getProducts();
+        if(state.products.length){
+          renderDropdownList(dd.search.value || '');
+          if(state.selectedId){
+            // re-select to update stock numbers
+            selectProduct(state.selectedId);
+          }
+        }
+      }
+
+      function wire(){
+        // set year & admin menu
+        if(window.requireAdmin && window.requireAdmin()){
+          if(document.getElementById('year')) document.getElementById('year').textContent = new Date().getFullYear();
+          if(window.initAdminMenu) window.initAdminMenu();
+        }
+
+        // init dropdown panel state
+        dd.panel = dd.root.querySelector('.stock-dd__panel');
+        dd.panel.style.display = 'none';
+        dd.panel.setAttribute('aria-hidden', 'true');
+
+        // open/close
+        dd.toggle.addEventListener('click', () => {
+          const isOpen = dd.toggle.getAttribute('aria-expanded') === 'true';
+          if(isOpen) closeDropdown(); else openDropdown();
+        });
+
+        dd.clear.addEventListener('click', () => {
+          dd.search.value = '';
+          renderDropdownList('');
+          dd.search.focus();
+        });
+
+        dd.search.addEventListener('input', (e) => {
+          renderDropdownList(e.target.value);
+        });
+
+        document.addEventListener('click', (e) => {
+          if(!dd.root) return;
+          if(!dd.root.contains(e.target)) closeDropdown();
+        });
+
+        // qty buttons
+        qty.plus.addEventListener('click', () => {
+          qty.input.value = String(clampPositiveInt(qty.input.value) + 1);
+          updateDeltaAndAfter();
+        });
+        qty.minus.addEventListener('click', () => {
+          const cur = clampPositiveInt(qty.input.value);
+          qty.input.value = String(Math.max(1, cur - 1));
+          updateDeltaAndAfter();
+        });
+
+        qty.input.addEventListener('input', () => {
+          // enforce positive integer only
+          const v = clampPositiveInt(qty.input.value);
+          qty.input.value = String(v);
+          updateDeltaAndAfter();
+        });
+
+        // form submit
+        const form = $('addStockForm');
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          clearAlert();
+
+          if(!state.selectedId){
+            productHelp.style.display = 'block';
+            showAlert('danger', 'Pilih produk terlebih dahulu.');
+            return;
+          }
+
+          const delta = clampPositiveInt(qty.input.value);
+          const products = getProducts();
+          const idx = products.findIndex(p => p.id === state.selectedId);
+          if(idx < 0){
+            showAlert('danger', 'Produk tidak ditemukan di LocalStorage.');
+            return;
+          }
+
+          const currentStock = Number(products[idx].stock ?? 0);
+          const newStock = currentStock + delta;
+
+          products[idx] = { ...products[idx], stock: newStock };
+          setProducts(products);
+
+          showAlert('success', `Berhasil menambah stok. Stok sekarang: ${newStock}`);
+
+          // reset + refresh lists
+          resetForm();
+          state.products = getProducts();
+        });
+      }
+
+      function init(){
+        state.products = getProducts();
+
+        // first render of dropdown list (empty query)
+        renderDropdownList('');
+
+        // prevent panel rendering errors when no products
+        dd.placeholder.textContent = 'Pilih produk...';
+
+        wire();
+      }
+
+      window.addEventListener('DOMContentLoaded', init);
+    })();
+  </script>
+
+  <style>
+    /* Local styles for stok page (minimal, consistent with admin theme) */
+    .btn-like{
+      width: 100%;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border:1px solid rgba(43,27,34,.12);
+      background: rgba(255,255,255,.78);
+      cursor:pointer;
+      font-weight: 900;
+      transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+      text-align:left;
+      color: inherit;
+    }
+
+    .stock-dd{position: relative;}
+    .stock-dd__toggle:focus{outline:none}
+    .stock-dd__toggleText{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .stock-dd__chev{opacity:.8; font-weight:1000}
+
+    .stock-dd__panel{
+      position:absolute;
+      z-index: 80;
+      left:0; right:0;
+      top: calc(100% + 10px);
+      background: rgba(255,255,255,.98);
+      border: 1px solid rgba(226,232,240,.95);
+      border-radius: 22px;
+      box-shadow: 0 28px 80px rgba(2,6,23,.18);
+      padding: 12px;
+      max-height: 340px;
+      overflow: hidden;
+    }
+
+    .stock-dd__searchWrap{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding: 6px;
+      border-radius: 18px;
+      border:1px solid rgba(96,165,250,.20);
+      background: rgba(248,250,252,.76);
+      margin-bottom: 10px;
+    }
+
+    .stock-dd__search{
+      border:0 !important;
+      background: transparent !important;
+      padding: 10px 12px;
+      font-weight: 1000;
+      flex:1;
+      min-width: 0;
+      outline:none;
+      box-shadow:none !important;
+    }
+
+    .stock-dd__clear{
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      border: 1px solid rgba(43,27,34,.10);
+      background: rgba(255,255,255,.7);
+      cursor:pointer;
+      font-weight: 1000;
+    }
+
+    .stock-dd__list{
+      overflow:auto;
+      max-height: 240px;
+      padding-right: 6px;
+    }
+
+    .stock-dd__item{
+      width: 100%;
+      border: 1px solid transparent;
+      background: transparent;
+      border-radius: 18px;
+      padding: 10px;
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      cursor:pointer;
+      text-align:left;
+      color: inherit;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+    }
+
+    .stock-dd__item:hover{
+      background: rgba(96,165,250,.10);
+      border-color: rgba(96,165,250,.20);
+    }
+
+    .stock-dd__thumbWrap{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      border: 1px solid rgba(43,27,34,.10);
+      background: rgba(255,255,255,.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+
+    .stock-dd__thumb{
+      width: 34px; height: 34px;
+      object-fit: contain;
+    }
+
+    .stock-dd__meta{min-width:0}
+    .stock-dd__name{font-weight:1200; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 100%;}
+    .stock-dd__sub{margin-top: 3px; color: rgba(43,27,34,.65); font-weight:900; font-size: 13px;}
+
+    .stock-dd__empty{padding: 12px 6px; color: rgba(43,27,34,.65); font-weight:900; font-size: 13px;}
+
+    .stock-qty{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+
+    .stock-qty__btn{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      border: 1px solid rgba(96,165,250,.22);
+      background: rgba(255,255,255,.78);
+      cursor:pointer;
+      font-weight:1200;
+      color: rgba(37,99,235,.95);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .stock-qty__btn:hover{transform: translateY(-1px); background: rgba(96,165,250,.08); border-color: rgba(96,165,250,.35)}
+
+    .stock-qty__input{
+      flex:1;
+      min-width: 0;
+      text-align:center;
+      font-weight:1200;
+      font-size: 16px;
+      -moz-appearance: textfield;
+    }
+    .stock-qty__input::-webkit-outer-spin-button,
+    .stock-qty__input::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0; }
+
+    .stock-info__value{font-weight:1200; color: rgba(30,41,59,.95)}
+    .stock-info__after{color: rgba(15,118,110,1)}
+
+    @media (max-width: 560px){
+      .stock-dd__panel{max-height: 320px;}
+      .stock-dd__list{max-height: 210px;}
+    }
+  </style>
+</body>
+</html>
+

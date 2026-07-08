@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nura Baby Care — E-commerce Perawatan Bayi</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main"><i class="fa-solid fa-arrow-down"></i> Lewati ke konten</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <div class="brand" aria-label="Nura Baby Care">
+        <img class="brand-logo" src="images/logo/baby-logo.png" alt="Nura Baby Care" onerror="this.style.display='none'" />
+        <div class="brand-text">
+          <div class="brand-name">Nura</div>
+          <div class="brand-tag">Baby Care</div>
+        </div>
+      </div>
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav" aria-label="Navigasi Utama">
+        <a href="index.html" class="nav-link active"><i class="fa-solid fa-house"></i> Beranda</a>
+        <a href="produk.html" class="nav-link"><i class="fa-solid fa-bag-shopping"></i> Produk</a>
+        <a href="keranjang.html" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a>
+        <a href="pesanan.html" class="nav-link" id="linkOrders" hidden><i class="fa-solid fa-box-open"></i> Pesanan</a>
+      </nav>
+
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="userMenuBtn" aria-label="Menu pengguna" title="Akun">
+          <i class="fa-regular fa-user"></i>
+        </button>
+        <div class="user-menu" id="userMenu" hidden>
+          <div class="user-menu-header">
+            <div class="avatar"><i class="fa-solid fa-sparkles"></i></div>
+            <div>
+              <div class="user-menu-name" id="userMenuName">Pengguna</div>
+              <div class="user-menu-role" id="userMenuRole">-</div>
+            </div>
+          </div>
+          <div class="user-menu-links">
+            <a href="profile.html" id="linkProfile" class="user-menu-link"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+            <a href="admin/dashboard.html" id="linkAdmin" class="user-menu-link"><i class="fa-solid fa-shield-halved"></i> Admin Dashboard</a>
+            <button class="user-menu-link btn-link" id="btnLogout" type="button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+          </div>
+        </div>
+
+        <a class="btn btn-primary" href="login.html" id="linkLogin"><i class="fa-solid fa-right-to-bracket"></i> Masuk</a>
+      </div>
+    </div>
+  </header>
+  
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <aside class="mobile-drawer" id="mobileDrawer">
+      <button class="drawer-close" id="drawerClose">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <a href="index.html"><i class="fa-solid fa-house"></i> Beranda</a>
+      <a href="produk.html"><i class="fa-solid fa-bag-shopping"></i> Produk</a>
+      <a href="keranjang.html"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a>
+      <a href="pesanan.html" id="mobileLinkOrders" hidden><i class="fa-solid fa-box-open"></i> Pesanan</a>
+    </aside>
+
+  <main id="main">
+    <section class="announcement">
+      <div class="container">
+        <p class="announcement-text"><i class="fa-solid fa-gift"></i> Nikmati diskon sampai 20% + Gratis Ongkir untuk produk Baby Care pilihan.</p>
+      </div>
+    </section>
+
+    <section class="hero hero-welcome">
+  <div class="container welcome-grid">
+
+    <div class="welcome-card">
+
+      <span class="welcome-eyebrow">
+        👶 Trusted Baby Care Store
+      </span>
+
+      <h1>
+        Semua Kebutuhan <br>
+        <span class="highlight">Si Kecil</span>
+      </h1>
+
+      <p class="lead">
+        Temukan berbagai produk bayi original dari brand terpercaya
+        untuk menemani setiap momen tumbuh kembang si kecil.
+      </p>
+
+      <div class="hero-actions">
+        <a href="produk.html" class="btn btn-primary">
+          <i class="fa-solid fa-cart-shopping"></i>
+          Belanja Sekarang
+        </a>
+
+        <button class="btn btn-voucher" id="claimVoucherBtn">
+          <i class="fa-solid fa-ticket"></i>
+          Claim Voucher 20%
+        </button>
+      </div>
+
+      <div class="welcome-banner">
+        <i class="fa-solid fa-gift"></i>
+        <div>
+          <strong>Voucher Member Baru</strong>
+          <p>Diskon 20% + Gratis Ongkir tanpa minimum pembelian.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="welcome-promos">
+
+      <div class="mini-promo">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span>Gratis Ongkir</span>
+      </div>
+
+      <div class="mini-promo">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>100% Original</span>
+      </div>
+
+      <div class="mini-promo">
+        <i class="fa-solid fa-baby"></i>
+        <span>Aman untuk Bayi</span>
+      </div>
+
+      <div class="mini-promo">
+        <i class="fa-solid fa-headset"></i>
+        <span>Customer Service</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+    <section class="section section-categories" aria-label="Kategori">
+      <div class="container">
+        <div class="section-head">
+          <h2>Kategori Populer</h2>
+          <p class="subtitle">Temukan kebutuhan bayi dengan cepat</p>
+        </div>
+        <div id="homeCategories" class="categories-scroll"></div>
+      </div>
+    </section>
+
+    <section id="tentang" class="about-section">
+      <div class="container">
+
+        <div class="section-head">
+            <span class="subtitle">Tentang Kami</span>
+            <h1>Perawatan Bayi yang Lembut & Terpercaya</h1>
+        </div>
+
+        <div class="about-cards" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="about-card">
+            <div class="about-icon"><i class="fa-solid fa-heart"></i></div>
+            <div>
+              <h3>Komitmen Kami</h3>
+              <p>Kami menyediakan produk perawatan bayi berkualitas, aman, dan lembut untuk kulit sensitif. Semua produk dipilih dari merek terpercaya.</p>
+            </div>
+          </div>
+          <div class="about-card">
+            <div class="about-icon"><i class="fa-solid fa-smile"></i></div>
+            <div>
+              <h3>Pengalaman Belanja</h3>
+              <p>Desain toko yang mudah digunakan, pengiriman cepat, dan dukungan pelanggan ramah memastikan kenyamanan setiap pembelian.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section section-products" aria-label="Flash Sale">
+      <div class="container">
+        <div class="section-head">
+          <h2>Produk Terlaris</h2>
+          <a class="link" href="produk.html">Lihat semua produk <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="grid products" id="homeFlash"></div>
+      </div>
+    </section>
+
+    <!-- <section class="section section-products section-soft" aria-label="Best Seller">
+      <div class="container">
+        <div class="section-head">
+          <h2>Best Seller</h2>
+          <a class="link" href="produk.html">Lihat semua produk <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="grid products" id="homeBestSeller"></div>
+      </div>
+    </section>
+
+   <section class="section section-products" aria-label="New Arrival">
+      <div class="container">
+        <div class="section-head">
+          <h2>New Arrival</h2>
+          <a class="link" href="produk.html">Lihat semua produk <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="grid products" id="homeNewArrival"></div>
+      </div>
+    </section> -->
+
+    <section class="section section-brand" aria-label="Brand Partner">
+      <div class="container">
+        <div class="section-head">
+          <h2>Brand Partner</h2>
+          <p class="subtitle">Merek premium yang kami kurasi untuk Anda.</p>
+        </div>
+        <div class="brand-grid">
+          <div class="brand-logo-card"><img src="images/logo/baby-logo.png" alt="Nura" /></div>
+          <div class="brand-logo-card"><img src="images/produk/baby-oil.png" alt="Johnson's" style="width:64px;"/> Johnson's</div>
+          <div class="brand-logo-card"><img src="images/produk/baby-shampoo.png" alt="Zwitsal" style="width:64px;"/> Zwitsal</div>
+          <div class="brand-logo-card"><img src="images/produk/diapers.png" alt="MamyPoko" style="width:64px;"/> MamyPoko</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-benefits" aria-label="Kenapa Belanja di Sini">
+      <div class="container">
+        <div class="section-head">
+          <h2>Kenapa Belanja di Sini</h2>
+          <p class="subtitle">Alasan para pelanggan memilih Nura.</p>
+        </div>
+        <div class="benefit-grid">
+          <div class="benefit-card"><i class="fa-solid fa-baby"></i><h3>Aman untuk Bayi</h3><p>Formula lembut, hypoallergenic, cocok untuk kulit sensitif.</p></div>
+          <div class="benefit-card"><i class="fa-solid fa-certificate"></i><h3>Original & Teruji</h3><p>Produk resmi dari merek terpercaya dan sudah teruji kualitasnya.</p></div>
+          <div class="benefit-card"><i class="fa-solid fa-truck-fast"></i><h3>Pengiriman Cepat</h3><p>Packing aman dan pengiriman cepat sampai tujuan.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-testimonials" aria-label="Testimoni Customer">
+      <div class="container">
+        <div class="section-head">
+          <h2>Testimoni Customer</h2>
+          <p class="subtitle">Pendapat mereka tentang pengalaman belanja di Nura.</p>
+        </div>
+        <div class="testimonial-grid">
+          <div class="testimonial-card fade-in"><p>“Produk berkualitas tinggi dan pengiriman cepat. Tampilan situsnya juga elegan sekali.”</p><strong>Aulia, Jakarta</strong></div>
+          <div class="testimonial-card fade-in"><p>“Suka dengan pilihan skincare-nya. Semua terasa premium dan mudah dibeli.”</p><strong>Rina, Bandung</strong></div>
+          <div class="testimonial-card fade-in"><p>“Tampilan web sangat bersih, navigasinya nyaman. Add to cart langsung responsif.”</p><strong>Maya, Surabaya</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-faq" aria-label="FAQ">
+      <div class="container">
+        <div class="section-head">
+          <h2>FAQ</h2>
+          <p class="subtitle">Pertanyaan umum yang sering ditanyakan.</p>
+        </div>
+        <div class="faq-grid">
+          <div class="faq-card"><h3>Bagaimana cara memesan?</h3><p>Pilih produk, tambahkan ke keranjang, lalu lanjut ke checkout.</p></div>
+          <div class="faq-card"><h3>Apakah stok terupdate?</h3><p>Ya. Stok tersinkron langsung berdasarkan data produk.</p></div>
+          <div class="faq-card"><h3>Apakah bisa mengubah jumlah produk?</h3><p>Bisa. Gunakan kontrol quantity langsung di card produk atau keranjang.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-newsletter" aria-label="Newsletter">
+      <div class="container newsletter-card">
+        <div>
+          <span class="eyebrow">Newsletter</span>
+          <h2>Dapatkan update promo dan skincare tips setiap minggu.</h2>
+        </div>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Masukkan email Anda" aria-label="Email newsletter" />
+          <button class="btn btn-primary" type="button">Daftar Sekarang</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="decor-elements" aria-hidden="true">
+      <img src="images/decor/baby-float.svg" class="decor-baby" alt="" />
+      <div class="decor-blob"></div>
+      <div class="decor-bubbles">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </main>
+
+      <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand">👶 Nura Baby Care</div>
+
+          <p class="muted">
+            Menemani setiap momen tumbuh kembang si kecil dengan
+            produk bayi berkualitas, aman, dan terpercaya untuk keluarga Indonesia.
+          </p>
+
+          <a href="produk.html" class="btn btn-primary" style="margin-top:18px;">
+            Jelajahi Produk
+          </a>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-title">Menu</div>
+
+            <a href="index.html">
+              <i class="fa-solid fa-house"></i> Beranda
+            </a>
+
+            <a href="produk.html">
+              <i class="fa-solid fa-bag-shopping"></i> Produk
+            </a>
+
+            <a href="keranjang.html">
+              <i class="fa-solid fa-cart-shopping"></i> Keranjang
+            </a>
+
+            <a href="profile.html">
+              <i class="fa-solid fa-gear"></i> Pengaturan dan Privasi
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-social">
+          <div class="footer-title">Ikuti Kami</div>
+          <div class="social-row">
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+          </div>
+          <p class="muted" style="margin-top:20px;">
+            📍 Indonesia
+          </p>
+          <p class="muted">
+            ✉ support@nurababycare.com
+          </p>
+          <div class="muted" style="margin-top:18px;">
+            © <span id="year"></span> Nura Baby Care
+          </div>
+          <small class="muted">
+              Made by nur
+          </small>
+        </div>
+      </div>
+    </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Floating Help Buttons (FAQ & Chat CS) -->
+  <div class="bb-fab-wrap" aria-label="Bantuan">
+    <button type="button" class="bb-fab-btn bb-fab-faq" id="bbFabFaqBtn" aria-haspopup="dialog" aria-controls="bbFaqModal">
+      <span class="bb-fab-icon"><i class="fa-solid fa-circle-question"></i></span>
+      <span class="bb-fab-text">FAQ</span>
+    </button>
+
+    <a class="bb-fab-btn bb-fab-chat" id="bbFabChatBtn" href="" aria-label="Chat CS via WhatsApp">
+      <span class="bb-fab-icon"><i class="fa-brands fa-whatsapp"></i></span>
+      <span class="bb-fab-text">Chat CS</span>
+    </a>
+  </div>
+
+  <div class="bb-faq-backdrop" id="bbFaqBackdrop" hidden></div>
+
+  <div class="bb-faq-modal" id="bbFaqModal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
+    <div class="bb-faq-card">
+      <div class="bb-faq-header">
+        <div class="bb-faq-title">
+          <strong>FAQ</strong>
+          <span>Pertanyaan yang paling sering diajukan</span>
+        </div>
+        <button type="button" class="bb-faq-close" id="bbFaqCloseBtn" aria-label="Tutup FAQ">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="bb-faq-content">
+        <div class="bb-accordion" aria-label="Accordion FAQ">
+          <div class="bb-acc-item" data-open="false">
+            <button class="bb-acc-btn" type="button">
+              <span>Bagaimana cara memesan?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="bb-acc-panel">
+              <div class="bb-acc-panel-inner">Pilih produk, tambahkan ke keranjang, lalu lanjut ke checkout.</div>
+            </div>
+          </div>
+          <div class="bb-acc-item" data-open="false">
+            <button class="bb-acc-btn" type="button">
+              <span>Apakah stok terupdate?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="bb-acc-panel">
+              <div class="bb-acc-panel-inner">Ya, stok tersinkron langsung berdasarkan data produk di Local Storage.</div>
+            </div>
+          </div>
+          <div class="bb-acc-item" data-open="false">
+            <button class="bb-acc-btn" type="button">
+              <span>Apakah bisa mengubah jumlah produk?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="bb-acc-panel">
+              <div class="bb-acc-panel-inner">Bisa. Gunakan kontrol quantity langsung di card produk atau keranjang.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      initApp();
+    });
+  </script>
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastText">Voucher berhasil di-claim!</span>
+</div>
+</body>
+</html>

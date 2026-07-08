@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Produk-Nura Baby Care</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main"><i class="fa-solid fa-arrow-down"></i> Lewati ke konten</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <div class="brand">
+        <img class="brand-logo" src="images/logo/baby-logo.png" alt="EcoSmet Baby Care" onerror="this.style.display='none'" />
+        <div class="brand-text">
+          <div class="brand-name">Nura</div>
+          <div class="brand-tag">Baby Care</div>
+        </div>
+      </div>
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav" aria-label="Navigasi Utama">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Beranda</a>
+        <a href="produk.html" class="nav-link active"><i class="fa-solid fa-bag-shopping"></i> Produk</a>
+        <a href="keranjang.html" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a>
+        <a href="pesanan.html" class="nav-link" id="linkOrders" hidden><i class="fa-solid fa-box-open"></i> Pesanan</a>
+      </nav>
+
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="userMenuBtn" aria-label="Menu pengguna" title="Akun">
+          <i class="fa-regular fa-user"></i>
+        </button>
+        <div class="user-menu" id="userMenu" hidden>
+          <div class="user-menu-header">
+            <div class="avatar"><i class="fa-solid fa-sparkles"></i></div>
+            <div>
+              <div class="user-menu-name" id="userMenuName">Pengguna</div>
+              <div class="user-menu-role" id="userMenuRole">-</div>
+            </div>
+          </div>
+          <div class="user-menu-links">
+            <a href="profile.html" class="user-menu-link" id="linkProfile"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+            <a href="admin/dashboard.html" class="user-menu-link" id="linkAdmin"><i class="fa-solid fa-shield-halved"></i> Admin Dashboard</a>
+            <button class="user-menu-link btn-link" id="btnLogout" type="button"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+          </div>
+        </div>
+
+        <a class="btn btn-primary" href="login.html" id="linkLogin"><i class="fa-solid fa-right-to-bracket"></i> Masuk</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <aside class="mobile-drawer" id="mobileDrawer">
+      <button class="drawer-close" id="drawerClose">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <a href="index.html"><i class="fa-solid fa-house"></i> Beranda</a>
+      <a href="produk.html"><i class="fa-solid fa-bag-shopping"></i> Produk</a>
+      <a href="keranjang.html"><i class="fa-solid fa-cart-shopping"></i> Keranjang</a>
+      <a href="pesanan.html" id="mobileLinkOrders" hidden><i class="fa-solid fa-box-open"></i> Pesanan</a>
+    </aside>
+
+
+  <main id="main" class="container page">
+    <section class="products-toolbar">
+        <div class="search-pill" role="search" aria-label="Cari produk">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="searchInput" type="search" placeholder="Cari produk, kategori, atau deskripsi..." />
+        </div>
+      <div class="toolbar-right">
+        <div class="select custom-select">
+          <i class="fa-solid fa-filter"></i>
+          <div class="dropdown" id="categoryDropdown" data-value="all">
+            <button class="dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="dropdown-value">Semua kategori</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu" role="listbox">
+              <div class="dropdown-item selected" data-value="all">Semua kategori</div>
+            </div>
+          </div>
+        </div>
+        <div class="select custom-select">
+          <i class="fa-solid fa-arrow-down-short-wide"></i>
+          <div class="dropdown" id="sortDropdown" data-value="new">
+            <button class="dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="dropdown-value">Terbaru</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu" role="listbox">
+              <div class="dropdown-item selected" data-value="new">Terbaru</div>
+              <div class="dropdown-item" data-value="price_asc">Harga Terendah</div>
+              <div class="dropdown-item" data-value="price_desc">Harga Tertinggi</div>
+              <div class="dropdown-item" data-value="name_asc">Nama A-Z</div>
+              <div class="dropdown-item" data-value="name_desc">Nama Z-A</div>
+              <div class="dropdown-item" data-value="stock_desc">Stok Terbanyak</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding:0">
+      <div class="grid products products--dense" id="productGrid"></div>
+      <div class="muted mt-12" id="productEmpty" hidden>Produk tidak ditemukan.</div>
+    </section>
+  </main>
+
+      <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand">👶 Nura Baby Care</div>
+
+          <p class="muted">
+            Menemani setiap momen tumbuh kembang si kecil dengan
+            produk bayi berkualitas, aman, dan terpercaya untuk keluarga Indonesia.
+          </p>
+
+          <a href="produk.html" class="btn btn-primary" style="margin-top:18px;">
+            Jelajahi Produk
+          </a>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <div class="footer-title">Menu</div>
+
+            <a href="index.html">
+              <i class="fa-solid fa-house"></i> Beranda
+            </a>
+
+            <a href="produk.html">
+              <i class="fa-solid fa-bag-shopping"></i> Produk
+            </a>
+
+            <a href="keranjang.html">
+              <i class="fa-solid fa-cart-shopping"></i> Keranjang
+            </a>
+
+            <a href="profile.html">
+              <i class="fa-solid fa-gear"></i> Pengaturan dan Privasi
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-social">
+          <div class="footer-title">Ikuti Kami</div>
+          <div class="social-row">
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+          </div>
+          <p class="muted" style="margin-top:20px;">
+            📍 Indonesia
+          </p>
+          <p class="muted">
+            ✉ support@nurababycare.com
+          </p>
+          <div class="muted" style="margin-top:18px;">
+            © <span id="year"></span> Nura Baby Care
+          </div>
+          <small class="muted">
+              Made by nur
+          </small>
+        </div>
+      </div>
+    </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      initAuthGuards();
+      initUserMenu();
+      renderProductsPage();
+    });
+  </script>
+</body>
+</html>

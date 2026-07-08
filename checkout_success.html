@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Berhasil — Nura Baby Care</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main"><i class="fa-solid fa-arrow-down"></i> Lewati ke konten</a>
+<!-- 
+  <header class="site-header site-header--simple">
+    <div class="container header-simple">
+      <a href="index.html" class="brand" aria-label="EcoSmet Baby Care">
+        <img class="brand-logo" src="images/logo/baby-logo.png" alt="EcoSmet Baby Care" onerror="this.style.display='none'" />
+        <div class="brand-text">
+          <div class="brand-name">Nura</div>
+          <div class="brand-tag">Baby Care</div>
+        </div>
+      </a>
+    </div>
+  </header> -->
+
+  <main id="main" class="container page">
+    <section class="invoice-wrap">
+      <div class="invoice-hero">
+        <div class="success-icon success-icon--invoice"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="invoice-hero-copy">
+          <h1>Invoice Digital Pesanan</h1>
+          <p class="muted">Detail transaksi kamu tersimpan di Local Storage.</p>
+        </div>
+      </div>
+
+      <div class="invoice-grid">
+        <!-- LEFT: Detail utama -->
+        <div class="invoice-left">
+          <div class="card invoice-card">
+            <div class="card-head">
+              <h2><i class="fa-solid fa-receipt"></i> Detail Pesanan</h2>
+              <span class="order-chip" id="orderStatusChip">
+                <i class="fa-solid fa-circle-info"></i> <span id="orderStatusText">Selesai</span>
+              </span>
+            </div>
+
+            <div class="invoice-summary">
+              <div class="summary-item">
+                <div class="summary-label">Nomor Pesanan</div>
+                <div class="summary-value">#<b id="orderId">-</b></div>
+              </div>
+              <div class="summary-item">
+                <div class="summary-label">Tanggal & Jam</div>
+                <div class="summary-value" id="orderDate">-</div>
+              </div>
+              <div class="summary-item">
+                <div class="summary-label">Total Pembayaran</div>
+                <div class="summary-value" id="orderTotal">-</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card invoice-card">
+            <div class="card-head">
+              <h2><i class="fa-solid fa-basket-shopping"></i> Daftar Produk</h2>
+              <div class="muted" style="font-weight:1000; font-size:13px" id="productsCount">- item</div>
+            </div>
+
+            <div id="invoiceProducts" class="invoice-products"></div>
+          </div>
+
+          <div class="card invoice-card">
+            <div class="card-head">
+              <h2><i class="fa-solid fa-truck-fast"></i> Informasi Pengiriman</h2>
+            </div>
+
+            <div class="invoice-two">
+              <div class="info-block">
+                <div class="info-label">Penerima</div>
+                <div class="info-value" id="rcvName">-</div>
+                <div class="info-sub" id="rcvPhone">-</div>
+              </div>
+
+              <div class="info-block">
+                <div class="info-label">Alamat Lengkap</div>
+                <div class="info-value info-value--multiline" id="rcvAddress">-</div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="invoice-two">
+              <div class="info-block">
+                <div class="info-label">Metode Pembayaran</div>
+                <div class="info-value" id="payMethod">-</div>
+              </div>
+              <div class="info-block">
+                <div class="info-label">Metode Pengiriman</div>
+                <div class="info-value" id="shipMethod">-</div>
+                <div class="info-sub" id="shipEta">-</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Ringkasan biaya -->
+        <div class="invoice-right">
+          <div class="card invoice-card invoice-right-card">
+            <div class="card-head">
+              <h2><i class="fa-solid fa-calculator"></i> Ringkasan Pembayaran</h2>
+            </div>
+
+            <div class="breakdown">
+              <div class="breakdown-row">
+                <span>Subtotal Produk</span>
+                <b id="sumSub">-</b>
+              </div>
+              <div class="breakdown-row">
+                <span>Diskon</span>
+                <b id="sumDiscount">-</b>
+              </div>
+              <div class="breakdown-row">
+                <span>Ongkir</span>
+                <b id="sumShipping">-</b>
+              </div>
+              <div class="breakdown-row total">
+                <span>Total Pembayaran</span>
+                <b id="sumTotal">-</b>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="payment-meta">
+              <div class="meta-line">
+                <span class="meta-label">Nomor pesanan</span>
+                <span class="meta-value" id="metaOrderId">-</span>
+              </div>
+              <div class="meta-line">
+                <span class="meta-label">Tanggal</span>
+                <span class="meta-value" id="metaOrderDate">-</span>
+              </div>
+              <div class="meta-line">
+                <span class="meta-label">Status</span>
+                <span class="meta-value" id="metaOrderStatus">-</span>
+              </div>
+
+              <div class="meta-line">
+                <span class="meta-label">Metode</span>
+                <span class="meta-value" id="metaPaymentMethod">-</span>
+              </div>
+
+              <div class="muted" style="margin-top:12px; font-weight:900; font-size:12.5px; line-height:1.6">
+                Simpan invoice ini sebagai referensi. Kamu bisa unduh invoice jika tersedia di halaman Riwayat Pesanan.
+              </div>
+            </div>
+
+            <div class="card-actions invoice-actions">
+              <a class="btn btn-primary" href="index.html">
+                <i class="fa-solid fa-house"></i> Kembali ke Beranda
+              </a>
+              <a class="btn btn-soft" href="pesanan.html">
+                <i class="fa-solid fa-clock-rotate-left"></i> Lihat Riwayat Pesanan
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">👶 Nura Baby Care</div>
+
+        <p class="muted">
+          Menemani setiap momen tumbuh kembang si kecil dengan
+          produk bayi berkualitas, aman, dan terpercaya untuk keluarga Indonesia.
+        </p>
+
+        <a href="produk.html" class="btn btn-primary" style="margin-top:18px;">
+          Jelajahi Produk
+        </a>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-title">Menu</div>
+
+          <a href="index.html">
+            <i class="fa-solid fa-house"></i> Beranda
+          </a>
+
+          <a href="produk.html">
+            <i class="fa-solid fa-bag-shopping"></i> Produk
+          </a>
+
+          <a href="keranjang.html">
+            <i class="fa-solid fa-cart-shopping"></i> Keranjang
+          </a>
+
+          <a href="profile.html">
+            <i class="fa-solid fa-gear"></i> Pengaturan dan Privasi
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-social">
+        <div class="footer-title">Ikuti Kami</div>
+        <div class="social-row">
+          <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+          <a class="social" href="https://www.instagram.com/nrrrsydhh/" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+        </div>
+        <p class="muted" style="margin-top:20px;">
+          📍 Indonesia
+        </p>
+        <p class="muted">
+          ✉ support@nurababycare.com
+        </p>
+        <div class="muted" style="margin-top:18px;">
+          © <span id="year"></span> Nura Baby Care
+        </div>
+        <small class="muted">
+            Made by nur
+        </small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      initAuthGuards();
+      renderSuccessPage();
+      if(typeof window.renderSuccessInvoicePage === 'function'){
+        window.renderSuccessInvoicePage();
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
