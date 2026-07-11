@@ -154,39 +154,41 @@ Dashboard admin tetap responsif sehingga pengelolaan produk dapat dilakukan mela
 4. Login sebagai Customer atau Admin untuk mengakses fitur sesuai hak akses.
 
 ---
-# 📝 Struktur Proyek 
+# ## 📂 Struktur Folder
+
+```
 ecommerceuas-main/
-├── index.html                # Halaman Beranda
-├── produk.html                # Katalog produk
-├── detail_produk.html         # Detail produk & ulasan
-├── keranjang.html              # Keranjang belanja
-├── checkout.html               # Checkout & simulasi QRIS
-├── checkout_success.html       # Invoice digital
-├── pesanan.html                 # Riwayat pesanan
-├── login.html / register.html   # Autentikasi pelanggan
-├── profile.html                 # Pengaturan & privasi akun
-├── script.js                    # Logika utama sisi customer
-├── style.css                    # Stylesheet sisi customer
+├── index.html                   # Halaman Beranda
+├── produk.html                  # Katalog produk
+├── detail_produk.html           # Detail produk & ulasan
+├── keranjang.html                # Keranjang belanja
+├── checkout.html                 # Checkout & simulasi QRIS
+├── checkout_success.html         # Invoice digital
+├── pesanan.html                  # Riwayat pesanan
+├── login.html / register.html    # Autentikasi pelanggan
+├── profile.html                  # Pengaturan & privasi akun
+├── script.js                     # Logika utama sisi customer
+├── style.css                     # Stylesheet sisi customer
 │
 ├── images/
-│   ├── kategori/                # Ikon kategori produk
-│   ├── logo/                    # Logo Nura Baby Care
-│   ├── produk/                  # Foto produk
-│   └── qris.png                 # Gambar QRIS simulasi
+│   ├── kategori/                 # Ikon kategori produk
+│   ├── logo/                     # Logo Nura Baby Care
+│   ├── produk/                   # Foto produk
+│   └── qris.png                  # Gambar QRIS simulasi
 │
 └── admin/
-    ├── login_admin.html         # Login admin
-    ├── dashboard.html           # Dashboard statistik
-    ├── produk.html               # Kelola produk
-    ├── tambah_produk.html        # Tambah produk
-    ├── edit_produk.html          # Edit produk
-    ├── stok.html                 # Manajemen stok
+    ├── login_admin.html          # Login admin
+    ├── dashboard.html            # Dashboard statistik
+    ├── produk.html                # Kelola produk
+    ├── tambah_produk.html         # Tambah produk
+    ├── edit_produk.html           # Edit produk
+    ├── stok.html                  # Manajemen stok
     ├── pesanan.html                # Kelola pesanan
-    ├── script_admin.js            # Logika sisi admin
-    ├── sidebar_mobile_fix.js      # Perbaikan sidebar mobile
-    ├── style_admin.css            # Stylesheet admin
-    └── images/produk/              # Salinan aset produk
-
+    ├── script_admin.js             # Logika sisi admin
+    ├── sidebar_mobile_fix.js       # Perbaikan sidebar mobile
+    ├── style_admin.css             # Stylesheet admin
+    └── images/produk/               # Salinan aset produk
+```
 ---
 # 📌 Kesimpulan
 
